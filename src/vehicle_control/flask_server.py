@@ -2,18 +2,29 @@
 Flask main server
 """
 
-from flask import jsonify, request
-from flask import Blueprint
-from vehicle_control.controller import Controller
+from flask import jsonify, request, Flask, render_template
+
+# APP
+
+app = Flask(
+    __name__,
+    static_folder='static/dist',
+    template_folder='static',
+)
 
 # ACTIONS
 
 actions = {}
 
+
+# GUI
+
+@app.route('/', methods=['GET'])
+def index():
+    return render_template('index.html')
+
+
 # REST API
-
-api = Blueprint('rest_api', __name__)
-
 
 def _make_error(error):
     return jsonify({
@@ -29,8 +40,8 @@ def _ok():
     })
 
 
-@api.route('/vehicle/api/action/move', methods=['POST'])
-def action_move():
+@app.route('/api/action/move', methods=['POST'])
+def api_action_move():
     """
     Handles requests with a body of type json in the format:
     { "direction": <left|right|forward|backward>
