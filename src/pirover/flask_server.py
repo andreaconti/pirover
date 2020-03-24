@@ -2,7 +2,7 @@
 Flask main server
 """
 
-from flask import jsonify, request, Flask, render_template
+from flask import jsonify, request, Flask, render_template, Response
 
 # APP
 
@@ -12,9 +12,11 @@ app = Flask(
     template_folder='static',
 )
 
-# ACTIONS
+# DEPENDENCIES
 
 actions = {}
+
+video_gen = None
 
 
 # GUI
@@ -38,6 +40,14 @@ def _ok():
         'done': True,
         'err': None
     })
+
+
+@app.route('/video_feed')
+def video_feed():
+    return Response(
+            video_gen,
+            mimetype='multipart/x-mixed-replace; boundary=frame'
+           )
 
 
 @app.route('/api/action/move', methods=['POST'])

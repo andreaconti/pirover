@@ -2,8 +2,9 @@
 Main program
 """
 
-import vehicle_control.flask_server as server
-from vehicle_control.controller import Controller
+import pirover.flask_server as server
+from pirover.controller import Controller
+from pirover.camera import video_stream
 import argparse
 
 
@@ -14,6 +15,9 @@ def main():
     parser.add_argument('--port', type=int, default=3000, help='port of the web server')
     parser.add_argument('--motors', type=int, nargs=4, help='raspberry 4 left and right GPIO motors pins')
     args = vars(parser.parse_args())
+
+    # setup video feed
+    server.video_feed = video_stream()
 
     # setup controller server api
     if args['motors'] is not None:

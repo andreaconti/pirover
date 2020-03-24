@@ -7,18 +7,18 @@ except ImportError:
     from distutils.core import setup, find_packages
 
 setup(
-    name="vehicle_control",
+    name="pirover",
     version="0.1",
     author="Andrea Conti",
     author_email="andrea.conti@tutanota.com",
-    description="software to control a vehicle with 2 motors",
+    description="software to control a rover with 2 motors, a camera and some other stuff",
     long_description=open('README.md').read(),
     package_dir={'': 'src'},
     packages=find_packages(),
     # package_data={'': ['*.dat', '*.csv']},
     entry_points={
         'console_scripts': [
-            'vehicle_control = vehicle_control.__main__:main'
+            'pirover = pirover.__main__:main'
         ]
     },
     tests_require=[
@@ -27,6 +27,7 @@ setup(
     install_requires=[
         'gpiozero',
         'flask',
-        'argparse'
+        'argparse',
+        'picamera'
     ]
 )
