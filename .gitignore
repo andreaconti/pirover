@@ -6,11 +6,13 @@ __pycache__/
 # C extensions
 *.so
 
+# flake8
+.flake8
+
 # Distribution / packaging
 .Python
 build/
 develop-eggs/
-dist/
 downloads/
 eggs/
 .eggs/
