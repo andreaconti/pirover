@@ -3,3 +3,4 @@ pigpio
 flask
 pillow
 numpy
+argparse

@@ -28,6 +28,9 @@ setup(
         'gpiozero',
         'flask',
         'argparse',
-        'picamera'
+        'pigpio',
+        'pillow',
+        'numpy',
+        # picamera: tested at runtime
     ]
 )
