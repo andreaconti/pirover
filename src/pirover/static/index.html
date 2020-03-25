@@ -2,17 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title></title>
+  <title>Pi Rover</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
 </head>
 <body>
 
-    <img src="{{ url_for('video_feed') }}">
+    <img class="video" src="{{ url_for('video_feed') }}" onerror="this.src=\"{{ url_for('static', filename='images/not_found.png') }}\"">
 
-    <div>
-      <input type="button" value="<" id="leftButton"/>
-      <input type="button" value=">" id="rightButton"/>
-      <input type="button" value="^" id="forwardButton"/>
-      <input type="button" value="v" id="backwardButton"/>
+    <div class="pad">
+        <div class="padleftright">
+            <button id="leftButton"><i class="arrow left"></i></button>
+            <button id="rightButton"><i class="arrow right"></i></button>
+        </div>
+        <div class="padupdown">
+            <button id="forwardButton"><i class="arrow up"></i></button>
+            <button id="backwardButton"><i class="arrow down"></i></button>
+        </div>
     </div>
 
     <script src="dist/bundle.js" type="text/javascript" charset="utf-8"></script>
