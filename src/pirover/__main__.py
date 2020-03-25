@@ -4,7 +4,7 @@ Main program
 
 import pirover.flask_server as server
 from pirover.controller import Controller
-from pirover.camera import video_stream
+from pirover.camera import Camera
 import argparse
 
 
@@ -17,7 +17,7 @@ def main():
     args = vars(parser.parse_args())
 
     # setup video feed
-    server.video_gen = video_stream()
+    server.camera = Camera()
 
     # setup controller server api
     if args['motors'] is not None:

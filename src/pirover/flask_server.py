@@ -16,7 +16,7 @@ app = Flask(
 
 actions = {}
 
-video_gen = None
+camera = None
 
 
 # GUI
@@ -44,7 +44,7 @@ def _ok():
 
 def gen():
     while True:
-        frame = next(video_gen)
+        frame = camera.read()
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 

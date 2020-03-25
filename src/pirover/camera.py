@@ -2,14 +2,17 @@
 Camera abstractions and utils for video streaming
 """
 
+import time
+from PIL import Image  # type: ignore
+import io
+import numpy as np     # type: ignore
+import threading
+
+
 try:
 
-    import time
-    from PIL import Image
-    import io
-
-    from picamera.array import PiRGBArray
-    from picamera import PiCamera
+    from picamera.array import PiRGBArray  # type: ignore
+    from picamera import PiCamera          # type: ignore
 
     def video_stream():
 
@@ -30,10 +33,6 @@ try:
 
 except ModuleNotFoundError:
 
-    import numpy as np
-    from PIL import Image
-    import time
-
     # if picamera is not available load an empty stream
     def video_stream():
         image = Image.fromarray(np.zeros(shape=(480, 640, 3), dtype=np.uint8))
@@ -43,3 +42,14 @@ except ModuleNotFoundError:
         while True:
             yield byte_im
             time.sleep(5)
+
+
+class Camera:
+
+    def __init__(self):
+        self._camera = video_stream()
+        self._lock = threading.Lock()
+
+    def read(self):
+        with self._lock:
+            return next(self._camera)
