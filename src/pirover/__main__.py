@@ -17,7 +17,7 @@ def main():
     args = vars(parser.parse_args())
 
     # setup video feed
-    server.video_feed = video_stream()
+    server.video_gen = video_stream()
 
     # setup controller server api
     if args['motors'] is not None:
